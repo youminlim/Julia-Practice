@@ -1,5 +1,10 @@
 # Solver for Kepler's Equation
 
+# Activate packages in environment
+cd(@__DIR__)
+using Pkg
+Pkg.activate(".")
+
 using Plots
 
 function solver(M, e)
@@ -23,33 +28,24 @@ function solver(M, e)
 end
 
 function plotter(x, y)
-
     # Defining the Earth to plot
     theta = LinRange(0, 2*pi, length(x))
-    x_e = zeros(length(theta))
-    y_e = zeros(length(theta))
+    x_e = r_earth * cos.(theta)
+    y_e = r_earth * sin.(theta)
 
-    for i in range(1, length(theta))
-        x_e[i] = r_earth * cos(theta[i])
-        y_e[i] = r_earth * sin(theta[i])
-    end
-
-    data_x = [x, x_e]
-    data_y = [y, y_e]
-
-    return plot(data_x, data_y, seriestype = :scatter, title = "Trajectory", aspect_ratio = :equal)
-    
+    plot(x_e,y_e,  title = "Satellite Trajectory", label = "Earth", aspect_ratio = :equal)
+    plot!(x, y, label = "Satellite")
 end
 
 # Define global variables
-altitude = 800
+altitude = 2000 # At perigee
 r_earth = 6379
 G = 6.67*10^-11
 M = 5.972*10^24
 
 # Orbit parameters
-e = 0
-a = altitude + r_earth
+e = 0.4
+a = (altitude + r_earth) / (1 - e)
 i = 0
 Ω = 0
 ω = 0 
@@ -80,5 +76,4 @@ for i in range(1, length(dt))
     y[i] = a * sin(E[i]) * sqrt(1 - e^2);
 end
 
-data = [x, y];
 plotter(x,y)
