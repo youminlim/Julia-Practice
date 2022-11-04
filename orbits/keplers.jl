@@ -5,37 +5,9 @@ cd(@__DIR__)
 using Pkg
 Pkg.activate(".")
 
+include("myFunctions.jl")
+
 using Plots
-
-function solver(M, e)
-    E = M
-    error = 1
-
-    while error >= 0.0001
-        f = E - (e * sin(E)) - M
-        df = 1 - (e * cos(E))
-
-        # Newton-Raphson formula
-        E_updated = E - (f / df)
-
-        # Update error and eccentric anomaly
-        error = E_updated - E
-        E = E_updated
-        
-        return E
-    end
-
-end
-
-function plotter(x, y)
-    # Defining the Earth to plot
-    theta = LinRange(0, 2*pi, length(x))
-    x_e = r_earth * cos.(theta)
-    y_e = r_earth * sin.(theta)
-
-    plot(x_e,y_e,  title = "Satellite Trajectory", label = "Earth", aspect_ratio = :equal)
-    plot!(x, y, label = "Satellite")
-end
 
 # Define global variables
 altitude = 2000 # At perigee
@@ -48,7 +20,7 @@ e = 0.4
 a = (altitude + r_earth) / (1 - e)
 i = 0
 Ω = 0
-ω = 0 
+ω = 0
 M0 = 60
 
 initial = [e, a, i, Ω, ω, M0]
