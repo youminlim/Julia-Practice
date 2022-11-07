@@ -16,14 +16,14 @@ G = 6.67*10^-11
 M = 5.972*10^24
 
 # Orbit parameters
-e = 0.4
+e = 0.9
 a = (altitude + r_earth) / (1 - e)
-i = 0
-Ω = 0
-ω = 0
-M0 = 60
+# i = 0
+# Ω = 0
+# ω = 0
+M0 = 0
 
-initial = [e, a, i, Ω, ω, M0]
+#initial = [e, a, i, Ω, ω, M0]
 M0 = deg2rad(M0)
 
 ### Program 
@@ -49,3 +49,4 @@ for i in range(1, length(dt))
 end
 
 plotter(x,y)
+# savefig("plot.png")
