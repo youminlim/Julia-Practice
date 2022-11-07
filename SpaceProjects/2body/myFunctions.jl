@@ -77,3 +77,22 @@ function rkSolver(rk, f, t0, tf, y0, n)
 
     return t, y
 end
+
+# Physics Checker
+function gravity(G, m, y)
+    # Calculates the gravitational force experienced by a body
+
+    r = eulerian(y[1:3], y[4:6])
+    return (G * m) / r^2
+end
+
+function accelChecker(G, m1, m2, y)
+    # Checks if the acceleration forces experienced by the bodies are of correct magnitude
+    
+    dims = size(y)
+    for i in range(1, length = dims[1])
+        if gravity(G, m1, y[i, :]) != (m1 / m2) * gravity(G, m2, y[i, :])
+         println("Error!")
+        end 
+     end 
+end

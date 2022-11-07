@@ -25,3 +25,5 @@ n = 480
 t, y = rkSolver(rk, twoBody3D, t0, tf, y0, n)
 
 plot2Body(t, y)
+
+accelChecker(G, m1, m2, y)
