@@ -49,4 +49,5 @@ for i in range(1, length(dt))
 end
 
 plotter(x,y)
+# Save plot figure to folder
 # savefig("plot.png")
