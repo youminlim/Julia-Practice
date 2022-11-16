@@ -1,11 +1,29 @@
 # Functions to solve and visualise 2 Body Problem
 
-function twoBody3D(t, y, r)
-    return [y[7], y[8], y[9], y[10], y[11], y[12], (G*m2*(y[4] - y[1])/r^3), (G*m2*(y[5] - y[2])/r^3), (G*m2*(y[6] - y[3])/r^3), (G*m1*(y[1] - y[4])/r^3), (G*m1*(y[2] - y[5])/r^3), (G*m1*(y[3] - y[6])/r^3)]
+function twoBody3D(t, u, r)
+    r = eulerian(u[1:3], u[4:6])
+
+    # Second derivatives
+    d2x1 = G*m2*(u[4] - u[1])/r^3
+    d2y1 = G*m2*(u[5] - u[2])/r^3
+    d2z1 = G*m2*(u[6] - u[3])/r^3
+    d2x2 = G*m2*(u[1] - u[4])/r^3
+    d2y2 = G*m2*(u[2] - u[5])/r^3
+    d2z2 = G*m2*(u[3] - u[6])/r^3
+
+    [u[7], u[8], u[9], u[10], u[11], u[12], d2x1, d2y1, d2z1, d2x2, d2y2, d2z2]
 end
 
-function twoBody2D(t, y, r)
-    return [y[5], y[6], y[7], y[8], (G*m2*(y[3] - y[1])/r^3), (G*m2*(y[4] - y[2])/r^3), (G*m1*(y[1] - y[2])/r^3), (G*m1*(y[2] - y[4])/r^3)]
+function twoBody2D(t, u, r)
+    r = eulerian(u[1:2], u[3:4])
+
+    # Second derivatives
+    d2x1 = G*m2*(u[3] - u[1])/r^3
+    d2y1 = G*m2*(u[4] - u[2])/r^3
+    d2x2 = G*m2*(u[1] - u[3])/r^3
+    d2y2 = G*m2*(u[2] - u[4])/r^3
+
+    [u[5], u[6], u[7], u[8], d2x1, d2y1, d2x2, d2y2]
 end
 
 

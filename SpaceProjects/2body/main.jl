@@ -9,16 +9,16 @@ using Plots
 include("myFunctions.jl")
 
 # System parameters
-G = 6.67 * 10 ^-11
-m1 = 10
-m2 = 10
+G = 6.67e-11
+m1 = 10e26
+m2 = 10e26
 #y0 = [0, 0, 0, 3000e3, 0, 0, 10e3, 20e3, 30e3, 0, 40e3, 0] # In the form y0 = [x01 y01 z01 x02 y02 z02 dot(x01 y01 z01 x02 y02 z02)]
 y0 = [0, 0, 3000e3, 0, 10e3, 20e3, 0, 40e3]
 
 # Time interval
 t0 = 0      # Initial time
-tf = 480    # Final time
-n = 10
+tf = 60   # Final time
+n = 1000
 
 t, y = rkSolver(twoBody2D, t0, tf, y0, n)
 
