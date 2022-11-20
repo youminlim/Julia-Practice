@@ -24,4 +24,6 @@ t, y = rkSolver(twoBody2D, t0, tf, y0, n)
 
 plot2Body(t, y)
 
+savefig("plot.png")
+
 #accelChecker(G, m1, m2, y)
