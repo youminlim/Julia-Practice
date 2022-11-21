@@ -67,7 +67,7 @@ v̲[:, 1] = v̲₀
 
 # Calculate r̲ and v̲ for range of θ
 for i in range(1, length(θ)-1)
-    r̲[:, i+1], v̲[:, i+1] = @time lagrangeCoefficients(r̲[:, i], v̲[:, i], Δθ)
+    r̲[:, i+1], v̲[:, i+1] = lagrangeCoefficients(r̲[:, i], v̲[:, i], Δθ)
 end
 
 # Plot Results
@@ -76,3 +76,5 @@ end
     x = r̲[1, :]
     y = r̲[2, :]
     plot(x, y)
+
+    savefig("plot.png")
