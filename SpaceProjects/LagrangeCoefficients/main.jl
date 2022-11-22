@@ -36,7 +36,8 @@ function lagrangeCoefficients(r̲₀, v̲₀, Δθ)
     ġ = 1 - (μ*r₀/h^2)*(1 - c)
 
     # Check if lagrange coefficients satisfy conservation of momentum
-    if (f*ġ) - (ḟ*g) != 1
+    condition = (f*ġ) - (ḟ*g)
+    if ( 0.99999 > condition) && (condition > 1.0001)
         println("Error!")
         println(r̲₀)
     end
